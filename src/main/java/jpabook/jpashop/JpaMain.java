@@ -19,14 +19,15 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
-
             Team team = new Team();
             team.setName("TeamA");
-            team.getMembers().add(member);
+            //team.getMembers().add(member);
             em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
             em.flush();
             em.clear();
