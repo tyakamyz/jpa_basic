@@ -29,8 +29,17 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
+            // em.flush();
+            // em.clear();
+
+            /* 영속성 컨텍스트 1차 캐시에는 Team안에 멤버가 없음 */
+            Team findTeam = em.find(Team.class, team.getId());  // 1차 캐시
+            for (Member m : findTeam.getMembers()){
+                m.getUsername();
+            }
+
+            /* 따라서 team.getMembers().add(member); 로 셋팅 해줘야함. 그리고 조금 더 객체지향적임 */
+            team.getMembers().add(member);
 
             tx.commit();
 
