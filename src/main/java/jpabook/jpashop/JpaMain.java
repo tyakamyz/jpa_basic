@@ -1,13 +1,12 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Team;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -19,28 +18,8 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Team team = new Team();
-            team.setName("TeamA");
-            //team.getMembers().add(member);
-            em.persist(team);
-
-            Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam(team);
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            /* 영속성 컨텍스트 1차 캐시에는 Team안에 멤버가 없음 */
-            Team findTeam = em.find(Team.class, team.getId());  // 1차 캐시
-            for (Member m : findTeam.getMembers()){
-                System.out.println(m.getUsername());
-            }
-
-            /* 따라서 team.getMembers().add(member); 로 셋팅 해줘야함. 그리고 조금 더 객체지향적임 */
-            /* 연관관계 편의 메서드: Member 클래스의 changeTeam(setTeam) 메서드로 로직 변경 */
-            // team.getMembers().add(member);
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             tx.commit();
 
