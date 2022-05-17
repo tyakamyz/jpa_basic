@@ -2,6 +2,8 @@ package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 public class Locker extends BaseEntity {
     @Id @GeneratedValue
@@ -10,6 +12,6 @@ public class Locker extends BaseEntity {
 
     private String name;
 
-    @OneToOne(mappedBy = "locker")
+    @OneToOne(mappedBy = "locker", fetch = LAZY)
     private Member member;
 }
