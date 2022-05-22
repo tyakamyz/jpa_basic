@@ -27,6 +27,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
+    @Embedded
+    private Address address;
+
     public Long getId() {
         return id;
     }
@@ -52,5 +55,33 @@ public class Member extends BaseEntity {
 
         /* 연관관계 편의 메서드 */
         team.getMembers().add(this);
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
